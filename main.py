@@ -4,6 +4,15 @@ import os
 import sys
 from pathlib import Path
 
+# Some Windows terminals (e.g. Git Bash) default stdout/stderr to a legacy
+# codepage (cp1252) that can't encode Vietnamese text, causing a crash on
+# print(). Force UTF-8 with a safe fallback so output never raises.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="backslashreplace")
+    except Exception:
+        pass
+
 from dotenv import load_dotenv
 
 from src.agent import KnowledgeBaseAgent

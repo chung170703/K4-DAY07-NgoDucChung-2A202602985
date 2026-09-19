@@ -1,0 +1,70 @@
+================================================================================
+LAB 07 RETRIEVAL BENCHMARK: THƯ VIỆN ĐẠI HỌC
+Chiến lược kiểm thử : Sentence-Based Chunker (max_sentences=3)
+Embedding Backend   : TFIDF
+Thư mục tài liệu    : D:\K4-DAY07-NgoDucChung-2A202602985\data\thu-vien
+================================================================================
+
+[1] Thống kê nạp dữ liệu (Data Ingestion):
+  - Số file tài liệu: 10 file (.md)
+  - Tổng số chunk   : 69 chunks
+  - Trung bình      : 6.9 chunk/file
+
+  -> Đã nạp thành công 69 chunks vào EmbeddingStore.
+
+[2] Chạy 5 câu hỏi Benchmark:
+--------------------------------------------------------------------------------
+
+>>> Câu 1 [Q1]: "Thời hạn mượn sách đối với sinh viên trong trường là bao nhiêu ngày và được gia hạn mấy lần?"
+    [Bộ lọc Metadata]: {'audience': 'student'}
+    [Đáp án chuẩn Gold]: Sinh viên, học viên được mượn tối đa 3 cuốn trong thời hạn 10 ngày, được gia hạn 1 lần (10 ngày/lần). (Lưu ý: Nếu không có bộ lọc audience=student thì kết quả sẽ bị lẫn sang Giảng viên 180 ngày).
+    [Tài liệu kỳ vọng]: huit-borrow-student
+    [Đánh giá Top-3]: Điểm: 1/2  |  ⚠️ TỐT (Tài liệu đúng nằm ở Top 3)
+         Top 1: [Score=0.524] (library-room-102#1) - ## 2. Chính sách - Số lượng: tối đa 5 cuốn. - Thời hạn: 30 ngày, được gia hạn 1 lần trong thời ...
+         Top 2: [Score=0.508] (library-borrow-home#4) - Phòng mượn sách tham khảo và sách văn học 102  Thời gian phục vụ: - Sáng: 8h00 - 12h00 - Chiều:...
+      🎯 Top 3: [Score=0.445] (huit-borrow-student#1) - - Gia hạn: 1 lần, 10 ngày/lần. ## Người sử dụng ngoài trường - Số lượng mượn tối đa: 1 cuốn. - ...
+    [Agent Response]: [Agent Demo] Dựa vào [1], Sinh viên, học viên được mượn tối đa 3 cuốn trong thời hạn 10 ngày, được gia hạn...
+
+>>> Câu 2 [Q2]: "Sinh viên được mượn tối đa bao nhiêu cuốn giáo trình tại Phòng 111 và thời hạn mượn là bao lâu?"
+    [Đáp án chuẩn Gold]: Mỗi bạn đọc được mượn tối đa 8 cuốn giáo trình tại Phòng 111 với thời hạn 90 ngày, được gia hạn 1 lần trong thời gian 30 ngày (tổng 120 ngày).
+    [Tài liệu kỳ vọng]: library-room-111, library-borrow-home
+    [Đánh giá Top-3]: Điểm: 2/2  |  ✅ XUẤT SẮC (Tài liệu đúng nằm ở Top 1)
+      🎯 Top 1: [Score=0.464] (library-room-111#0) - # Quy trình mượn trả sách tại Phòng 111  ## Vị trí Phòng 111, mặt sau Tòa nhà Thư viện Tạ Quang...
+      🎯 Top 2: [Score=0.449] (library-borrow-home#4) - Phòng mượn sách tham khảo và sách văn học 102  Thời gian phục vụ: - Sáng: 8h00 - 12h00 - Chiều:...
+         Top 3: [Score=0.406] (huit-borrow-faculty#1) - - Gia hạn: không được gia hạn (0 lần). ## Giảng viên thỉnh giảng - Số lượng mượn tối đa: 2 cuốn...
+    [Agent Response]: [Agent Demo] Dựa vào [1], Mỗi bạn đọc được mượn tối đa 8 cuốn giáo trình tại Phòng 111 với thời hạn 90 ngà...
+
+>>> Câu 3 [Q3]: "Tại Phòng 102 mượn sách tham khảo, số lượng mượn tối đa là bao nhiêu và được gia hạn mấy ngày?"
+    [Đáp án chuẩn Gold]: Sinh viên được mượn tối đa 5 cuốn sách tham khảo tại Phòng 102, thời hạn mượn 30 ngày, được gia hạn 1 lần trong 7 ngày.
+    [Tài liệu kỳ vọng]: library-room-102, library-borrow-home
+    [Đánh giá Top-3]: Điểm: 2/2  |  ✅ XUẤT SẮC (Tài liệu đúng nằm ở Top 1)
+      🎯 Top 1: [Score=0.599] (library-borrow-home#4) - Phòng mượn sách tham khảo và sách văn học 102  Thời gian phục vụ: - Sáng: 8h00 - 12h00 - Chiều:...
+      🎯 Top 2: [Score=0.487] (library-room-102#1) - ## 2. Chính sách - Số lượng: tối đa 5 cuốn. - Thời hạn: 30 ngày, được gia hạn 1 lần trong thời ...
+         Top 3: [Score=0.479] (huit-borrow-faculty#1) - - Gia hạn: không được gia hạn (0 lần). ## Giảng viên thỉnh giảng - Số lượng mượn tối đa: 2 cuốn...
+    [Agent Response]: [Agent Demo] Dựa vào [1], Sinh viên được mượn tối đa 5 cuốn sách tham khảo tại Phòng 102, thời hạn mượn 30...
+
+>>> Câu 4 [Q4]: "Mức bồi thường khi làm mất tài liệu thư viện không còn phát hành trên thị trường được tính thế nào?"
+    [Đáp án chuẩn Gold]: Tài liệu không phát hành trên thị trường: bồi thường bằng tiền gấp 03 lần giá bìa. Nếu tài liệu còn phát hành: bồi thường tài liệu mới tương đương cộng 20.000đ phí xử lý kỹ thuật.
+    [Tài liệu kỳ vọng]: library-lost-document
+    [Đánh giá Top-3]: Điểm: 2/2  |  ✅ XUẤT SẮC (Tài liệu đúng nằm ở Top 1)
+      🎯 Top 1: [Score=0.505] (library-lost-document#1) - Mức bồi thường Xác định trên cơ sở thời giá thị trường, đủ để khắc phục hậu quả thiệt hại: - Tà...
+      🎯 Top 2: [Score=0.397] (library-lost-document#0) - # Thủ tục đền sách khi làm mất tài liệu thư viện  (Trích Nội quy Thư viện)  ## 1. Trường hợp ph...
+      🎯 Top 3: [Score=0.343] (library-lost-document#3) - - Lãnh đạo Thư viện: yêu cầu bồi thường khi mất, hư hỏng thiết bị, căn cứ hóa đơn, chứng từ tha...
+    [Agent Response]: [Agent Demo] Dựa vào [1], Tài liệu không phát hành trên thị trường: bồi thường bằng tiền gấp 03 lần giá bì...
+
+>>> Câu 5 [Q5]: "Quy định mượn tài liệu in-house đọc tại chỗ cho phép mượn tối đa mấy cuốn và trả trước mấy giờ?"
+    [Đáp án chuẩn Gold]: Mỗi lần bạn đọc được mượn tối đa 02 cuốn tài liệu in-house và phải trả lại tại quầy thủ thư Phòng 411 trước 17h30 cùng ngày.
+    [Tài liệu kỳ vọng]: library-inhouse-borrow
+    [Đánh giá Top-3]: Điểm: 2/2  |  ✅ XUẤT SẮC (Tài liệu đúng nằm ở Top 1)
+      🎯 Top 1: [Score=0.521] (library-inhouse-borrow#0) - # Mượn – trả tài liệu in house  "Mượn in house" (mượn tại chỗ) là hình thức mượn tài liệu để đọ...
+         Top 2: [Score=0.313] (library-faq#9) - **Làm thế nào để mượn tài liệu đọc tại chỗ?**    Tại các phòng đọc tự chọn, lấy tài liệu từ giá...
+         Top 3: [Score=0.251] (huit-borrow-student#0) - # Quy định mượn trả sách dành cho sinh viên, học viên  Nguồn: Trung tâm Thông tin - Thư viện Đạ...
+    [Agent Response]: [Agent Demo] Dựa vào [1], Mỗi lần bạn đọc được mượn tối đa 02 cuốn tài liệu in-house và phải trả lại tại q...
+
+================================================================================
+TỔNG KẾT ĐIỂM TRUY XUẤT (RETRIEVAL PRECISION): 9/10 ĐIỂM
+================================================================================
+Thông tin để điền vào REPORT_NHOM.md (Mục 3):
+- Chiến lược : SENTENCE (Sentence-Based Chunker (max_sentences=3))
+- Tổng điểm  : 9/10
+================================================================================
